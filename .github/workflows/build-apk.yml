@@ -1,4 +1,6 @@
-name: Build NEHA BRAND APK
+
+          
+      name: Build NEHA BRAND APK
 
 on:
   push:
@@ -17,21 +19,18 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           
-      - name: Setup Gradle
+      - name: Setup Gradle 8.13
         uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: 8.5
+          gradle-version: 8.13
           
-      - name: Generate Wrapper
+      - name: Generate Wrapper 8.13
         run: |
-          if [ ! -f "./gradlew" ]; then
-            gradle wrapper --gradle-version 8.5
-          fi
+          gradle wrapper --gradle-version 8.13
           chmod +x gradlew
-          ls -la
           
       - name: Build APK
-        run: ./gradlew assembleDebug --stacktrace
+        run: ./gradlew assembleDebug --stacktrace --no-daemon
           
       - name: Upload APK
         uses: actions/upload-artifact@v4
