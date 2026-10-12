@@ -1,38 +1,29 @@
-
-          
-      name: Build NEHA BRAND APK
-
+               name: Build NEHA BRAND APK
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-
       - name: Setup Gradle 9.3.1
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: 9.3.1
-
       - name: Generate Wrapper
         run: |
           gradle wrapper --gradle-version 9.3.1
           chmod +x gradlew
           ./gradlew --version
-
       - name: Build APK
         run: ./gradlew assembleDebug --stacktrace --no-daemon
-
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
