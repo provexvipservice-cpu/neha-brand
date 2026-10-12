@@ -24,14 +24,14 @@ jobs:
         with:
           gradle-version: 9.3.1
 
-      - name: Generate Wrapper 9.3.1
+      - name: Generate Wrapper
         run: |
           gradle wrapper --gradle-version 9.3.1
           chmod +x gradlew
-         ./gradlew --version
+          ./gradlew --version
 
       - name: Build APK
-        run:./gradlew assembleDebug --stacktrace --no-daemon
+        run: ./gradlew assembleDebug --stacktrace --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
